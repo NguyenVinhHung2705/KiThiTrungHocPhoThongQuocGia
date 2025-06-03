@@ -1,9 +1,96 @@
+<!--       $$\   $$\  $$$$$$\  $$\   $$\ $$\     $$\ $$$$$$$$\ $$\   $$\         $$\    $$\ $$\   $$\ $$\   $$\  $$$$$$\        
+           $$$\  $$ |$$  __$$\ $$ |  $$ |\$$\   $$  |$$  _____|$$$\  $$ |        $$ |   $$ |$$ |  $$ |$$$\  $$ |$$  __$$\      $$$$\  $$$$  \
+           $$$$\ $$ |$$ /  \__|$$ |  $$ | \$$\ $$  / $$ |      $$$$\ $$ |        $$ |   $$ |$$ |  $$ |$$$$\ $$ |$$ /  \__|    $$$$$$$$$$$$$  |
+           $$ $$\$$ |$$ |$$$$\ $$ |  $$ |  \$$$$  /  $$$$$\    $$ $$\$$ |        $$$$$$$$$ |$$ |  $$ |$$ $$\$$ |$$ |$$$$\     $$$$$$$$$$$$$ /
+           $$ \$$$$ |$$ |\_$$ |$$ |  $$ |   \$$  /   $$  __|   $$ \$$$$ |        $$  ___$$ |$$ |  $$ |$$ \$$$$ |$$ |\_$$ |      $$$$$$$$$  /
+           $$ |\$$$ |$$ |  $$ |$$ |  $$ |    $$ |    $$ |      $$ |\$$$ |        $$ |   $$ |$$ |  $$ |$$ |\$$$ |$$ |  $$ |       $$$$$$  /
+           $$ | \$$ |\$$$$$$  |\$$$$$$  |    $$ |    $$$$$$$$\ $$ | \$$ |        $$ |   $$ |\$$$$$$  |$$ | \$$ |\$$$$$$  |         $$  /
+           \__|  \__| \______/  \______/     \__|    \________|\__|  \__|        \__|   \__| \______/ \__|  \__| \______/          \_/                -->
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đếm ngược kì thi trung học quốc gia</title>
-  </head>
-  <body></body>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đếm ngược kì thi trung học quốc gia</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #container {
+      text-align: center;
+      border: 2px solid #e74c3c;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #e74c3c;
+      margin-bottom: 20px;
+    }
+    #countdown,#tip {
+      font-size: 2rem;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Đếm ngược kì thi trung học phổ thông quốc gia</h1>
+    <div id="countdown"></div>
+    <p id="tip"></p>
+  </div>
+    
+
+  <script>
+    const examDate = new Date("2025-06-26T00:00:00");
+    const tips = [
+                "Ngủ đủ giấc trước ngày thi để có tinh thần tốt nhất.",
+                "Đừng học quá khuya, hãy để đầu óc được thư giãn.",
+                "Chuẩn bị đầy đủ giấy tờ, bút, máy tính nếu cần.",
+                "Đến phòng thi sớm ít nhất 15-30 phút để ổn định tinh thần.",
+                "Đọc kỹ đề thi trước khi bắt đầu làm bài.",
+                "Dành vài phút cuối giờ để soát lại bài làm.",
+                "Đừng hoảng loạn nếu gặp câu khó, hãy làm câu dễ trước.",
+                "Uống đủ nước nhưng đừng uống quá nhiều trước khi thi.",
+                "Ăn sáng nhẹ nhàng, đầy đủ dinh dưỡng trước khi đi thi.",
+                "Tin vào chính mình, bạn đã cố gắng rất nhiều rồi."
+                ];
+    const randomIndex = Math.floor(Math.random() * tips.length);
+    document.getElementById("tip").innerText = "💡 Mẹo: " + tips[randomIndex];
+    function updateCountdown() {
+      const now = new Date();
+      const timeLeft = examDate - now;
+
+      if (timeLeft <= 0) {
+        document.getElementById("countdown").innerHTML = "Hôm nay là ngày thi đó, chúc bạn thi tốt!";
+        clearInterval(timer);
+        return;
+      }
+
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+      const seconds = Math.floor((timeLeft / 1000) % 60);
+
+      document.getElementById("countdown").innerHTML =
+        `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
+    }
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
+</body>
 </html>
+
